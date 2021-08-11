@@ -18,7 +18,7 @@ The examples indicated below each represent the most basic possible handling of 
 
 I hope you find it useful,
 
-![Image of PLC4XS7](../assets/Finales/Medianos/s7_124x175.png?raw=true)
+
 
 
 File | Description
@@ -31,6 +31,7 @@ PLCEventUsrSubscription  | "USR", User defined event subscriptio example.
 PLCEventAlarmSubscription | "ALM", ALARM, ALARM_8, ALARM_S type event subscriptio example. 
 
 
+![Image of PLC4XS7](../assets/Finales/Medianos/s7_124x175.png?raw=true) ** Work in progress! **
 
 
 *Possible SSL Partial Lists:*

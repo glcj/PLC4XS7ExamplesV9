@@ -18,10 +18,18 @@ The examples indicated below each represent the most basic possible handling of 
 
 I hope you find it useful,
 
+![Image of PLC4XS7](../assets/11.png?raw=true)
+
 
 File | Description
 ------------ | -------------
 PLCReadBitFields |  Example for Read bit fields from S7.
+PLCEventSubscription | Step by step event subscription.
+PLCEventModeSubscription | "MODE", PLC operation mode event subscription example.
+PLCEventSysSubscription  | "SYS", PLC system event subscriptio example.
+PLCEventUsrSubscription  | "USR", User defined event subscriptio example.
+PLCEventAlarmSubscription | "ALM", ALARM, ALARM_8, ALARM_S type event subscriptio example. 
+
 
 
 

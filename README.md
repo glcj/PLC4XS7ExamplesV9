@@ -18,7 +18,7 @@ The examples indicated below each represent the most basic possible handling of 
 
 I hope you find it useful,
 
-![Image of PLC4XS7](../assets/11.png?raw=true)
+![Image of PLC4XS7](../assets/Finales/Medianos/11.png?raw=true)
 
 
 File | Description

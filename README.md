@@ -30,7 +30,7 @@ PLCEventSysSubscription  | "SYS", PLC system event subscriptio example.
 PLCEventUsrSubscription  | "USR", User defined event subscriptio example.
 PLCEventAlarmSubscription | "ALM", ALARM, ALARM_8, ALARM_S type event subscriptio example.
 PLCOptimizerByRequest | It tests the driver's ability to handle a number of requests that exceed the maximum PDU size set by the PLC.
-PLCOptimizerByRequestSize | Tests the driver's ability to handle requests whose request / response exceeds the PDU size set in the PLC.  
+PLCOptimizerByRequestSize | It tests the driver's ability to handle requests whose request / response exceeds the PDU size set in the PLC.  
 
 
 ![Image of PLC4XS7](../assets/Finales/Medianos/s7_124x175.png?raw=true) ** Work in progress! **

@@ -48,7 +48,7 @@ public class PLCEventSubscription {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+
         try (PlcConnection plcConnection = new PlcDriverManager().getConnection("s7://192.168.1.51?remote-rack=0&remote-slot=3&controller-type=S7_400")){
             
             /*  

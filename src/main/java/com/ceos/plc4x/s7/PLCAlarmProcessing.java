@@ -21,55 +21,57 @@ package com.ceos.plc4x.s7;
 import java.util.Map;
 import org.apache.plc4x.java.PlcDriverManager;
 import org.apache.plc4x.java.api.PlcConnection;
-import org.apache.plc4x.java.api.exceptions.PlcConnectionException;
 import org.apache.plc4x.java.api.messages.PlcSubscriptionRequest;
 import org.apache.plc4x.java.api.messages.PlcSubscriptionResponse;
 import org.apache.plc4x.java.api.model.PlcConsumerRegistration;
 import org.apache.plc4x.java.s7.events.S7AlarmEvent;
-import org.apache.plc4x.java.s7.events.S7ModeEvent;
-import org.apache.plc4x.java.s7.events.S7SysEvent;
+import org.apache.plc4x.java.s7.utils.S7EventHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- *
+ * This demo uses a "MonDigital" block to capture Alarm8 fields from a PCS7 
+ * technology block.
+ * The "MonDigital" instance block is configured with the following 
+ * transfer data, and called every second.
+ * . ExtVal105 -> MB200
+ * . ExtVal106 -> MD100
+ * . ExtVal107 -> MD300
+ * . ExtVal108 -> M0.7 
+ * 
  * @author cgarcia
  */
-public class PLCEventAlarmSubscription {
+public class PLCAlarmProcessing {
 
+private static Logger LOGGER = LoggerFactory.getLogger(PLCAlarmProcessing.class);  
+
+    private final static String ALARM_MSG_TEST = "BatchId: @3X%4x@\r\nBatch Name @1c%32s@\r\nThis take one byte value:@5Y%2u@.\r\nThe int en Hex format: @6X%4x@\r\nReading real number: @7R%2.3f@ y una lista  @8b%t#lista1@ ";
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws Exception {
-        try (PlcConnection connection = new PlcDriverManager().getConnection("s7://192.168.1.51?remote-rack=0&remote-slot=3&controller-type=S7_400")) {
+    public static void main(String[] args)  throws Exception   {
+        try (PlcConnection connection = new PlcDriverManager().getConnection("s7://192.168.1.51?remote-rack=0&remote-slot=3&controller-type=S7_400")) {  
             final PlcSubscriptionRequest.Builder subscription = connection.subscriptionRequestBuilder();
-
             subscription.addEventField("myALM", "ALM");
-            final PlcSubscriptionRequest sub = subscription.build();
             
-            System.out.println("Query: " + sub.toString());
-
+            final PlcSubscriptionRequest sub = subscription.build();
+                                     
             final PlcSubscriptionResponse subresponse = sub.execute().get();
             
-            //Si todo va bien con la subscripción puedo
             PlcConsumerRegistration registerAlm = 
                     subresponse
                     .getSubscriptionHandle("myALM")
                     .register(msg -> {
-                        System.out.println("******** S7AlmEvent *********");
-                        Map<String, Object> map = ((S7AlarmEvent) msg).getMap();
-                        map.forEach((x, y) -> { 
-                            System.out.println(x + " : " + y);
-                        });
-                        System.out.println("****************************");
-                    });
-
-            System.out.println("Waiting for the messages.");
+                        LOGGER.info(msg.toString());
+                        System.out.println("Message: " + S7EventHelper.AlarmProcessing((S7AlarmEvent) msg, ALARM_MSG_TEST, null));
+                        System.out.println("");
+                    });            
             
-            Thread.sleep(120000);
+            Thread.sleep(5000);            
             
             connection.close();
             
-            System.out.println("Ending the connection.");            
-        }        
+        }
     }
     
 }

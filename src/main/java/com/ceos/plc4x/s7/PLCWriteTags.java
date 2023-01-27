@@ -22,13 +22,6 @@ package com.ceos.plc4x.s7;
  *
  * @author cgarcia
  */
-public class PLCOptimizerByRequestSize {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+public class PLCWriteTags {
     
 }

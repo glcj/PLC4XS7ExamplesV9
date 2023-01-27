@@ -18,16 +18,6 @@
  */
 package com.ceos.plc4x.s7;
 
-import java.util.Map;
-import org.apache.plc4x.java.PlcDriverManager;
-import org.apache.plc4x.java.api.PlcConnection;
-import org.apache.plc4x.java.api.exceptions.PlcConnectionException;
-import org.apache.plc4x.java.api.messages.PlcSubscriptionRequest;
-import org.apache.plc4x.java.api.messages.PlcSubscriptionResponse;
-import org.apache.plc4x.java.api.model.PlcConsumerRegistration;
-import org.apache.plc4x.java.s7.events.S7ModeEvent;
-import org.apache.plc4x.java.s7.readwrite.types.ModeTransitionType;
-
 /**
  *
  * @author cgarcia
@@ -38,6 +28,7 @@ public class PLCEventModeSubscription {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
+        /*
         try (PlcConnection connection = new PlcDriverManager().getConnection("s7://192.168.1.51?remote-rack=0&remote-slot=3&controller-type=S7_400")) {
             final PlcSubscriptionRequest.Builder subscription = connection.subscriptionRequestBuilder();
 
@@ -72,7 +63,8 @@ public class PLCEventModeSubscription {
             
             System.out.println("Ending the connection.");             
             
-        }        
+        }   
+*/
     }
     
 }

@@ -18,24 +18,14 @@
  */
 package com.ceos.plc4x.s7;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufUtil;
-import java.util.List;
 import java.util.Map;
-import org.apache.plc4x.java.PlcDriverManager;
+import org.apache.plc4x.java.DefaultPlcDriverManager;
 import org.apache.plc4x.java.api.PlcConnection;
-import org.apache.plc4x.java.api.messages.PlcReadRequest;
-import org.apache.plc4x.java.api.messages.PlcReadResponse;
-import org.apache.plc4x.java.api.messages.PlcSubscriptionRequest;
 import org.apache.plc4x.java.api.messages.PlcSubscriptionRequest;
 import org.apache.plc4x.java.api.messages.PlcSubscriptionResponse;
 import org.apache.plc4x.java.api.messages.PlcUnsubscriptionRequest;
 import org.apache.plc4x.java.api.model.PlcConsumerRegistration;
-import org.apache.plc4x.java.api.types.PlcResponseCode;
 import org.apache.plc4x.java.s7.events.S7AlarmEvent;
-import org.apache.plc4x.java.s7.events.S7CyclicEvent;
-import org.apache.plc4x.java.s7.readwrite.types.DataTransportErrorCode;
-import org.apache.plc4x.java.s7.utils.S7EventHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,7 +43,7 @@ private static Logger LOGGER = LoggerFactory.getLogger(PLCAlarmAck.class);
     public static void main(String[] args) throws Exception  {
         // TODO code application logic here
         
-        try (PlcConnection connection = new PlcDriverManager().getConnection("s7://192.168.1.51?remote-rack=0&remote-slot=3&controller-type=S7_400")) {  
+        try (PlcConnection connection = new DefaultPlcDriverManager().getConnection("s7://192.168.1.51?remote-rack=0&remote-slot=3&controller-type=S7_400")) {  
 
             final PlcSubscriptionRequest.Builder subscription = connection.subscriptionRequestBuilder();
             final PlcSubscriptionRequest.Builder subscription2 = connection.subscriptionRequestBuilder();
@@ -61,10 +51,10 @@ private static Logger LOGGER = LoggerFactory.getLogger(PLCAlarmAck.class);
             final PlcSubscriptionRequest.Builder alarmquery = connection.subscriptionRequestBuilder(); 
             final PlcUnsubscriptionRequest.Builder plcunsubscription = connection.unsubscriptionRequestBuilder();
 
-            subscription.addEventField("myALM", "ALM");
-            subscription.addEventField("myCYC1", "CYC(B1SEC:3):%MB2.0:BYTE[10],%MB200.0:BYTE[10]");  
-            subscription.addEventField("myCYC2", "CYC(B1SEC:1):%MB30.0:BYTE[30]");   
-            subscription.addEventField("myCYC3", "CYC(B1SEC:4):%DB80.DBB94[30]");              
+            subscription.addEventTagAddress("myALM", "ALM");
+            subscription.addEventTagAddress("myCYC1", "CYC(B1SEC:3):%MB2.0:BYTE[10],%MB200.0:BYTE[10]");  
+            subscription.addEventTagAddress("myCYC2", "CYC(B1SEC:1):%MB30.0:BYTE[30]");   
+            subscription.addEventTagAddress("myCYC3", "CYC(B1SEC:4):%DB80.DBB94[30]");              
             final PlcSubscriptionRequest sub = subscription.build();
                                      
             final PlcSubscriptionResponse subresponse = sub.execute().get();
@@ -107,13 +97,13 @@ private static Logger LOGGER = LoggerFactory.getLogger(PLCAlarmAck.class);
                         LOGGER.info("myCYC2: " + map.get("JOBID") + " : " + map.get("TYPE"));
                     });  
   */          
-
+/*
             short[] jobids = new short[1];
             PlcConsumerRegistration registerCyc3 = 
                     subresponse
                     .getSubscriptionHandle("myCYC3")
                     .register(msg -> {      
-                        S7CyclicEvent s7cycmsg = (S7CyclicEvent) msg;
+                        S7CyclicValueEvent s7cycmsg = (S7CyclicValueEvent) msg;
                         Map<String, Object> map = s7cycmsg.getMap();
                         PlcSubscriptionRequest request = (PlcSubscriptionRequest) msg.getObject("REQUEST");
                         if (request != null)
@@ -122,9 +112,9 @@ private static Logger LOGGER = LoggerFactory.getLogger(PLCAlarmAck.class);
                         LOGGER.info("myCYC: " + s7cycmsg.getAllBytes("DATA_0"));
                         jobids[0] =(short) map.get("JOBID");
                     });              
+            */
             
-            
-
+/*
             
             System.out.println("Campos : " + subresponse.getRequest().getFieldNames());
                         
@@ -173,7 +163,7 @@ private static Logger LOGGER = LoggerFactory.getLogger(PLCAlarmAck.class);
             System.out.println("CalcelJob : " + rescanceljob.getResponseCode("killCYC3"));
             
             
-            Thread.sleep(4000);
+            Thread.sleep(4000); */
             /*
             registerCyc3 = 
                     subresponse

@@ -18,13 +18,6 @@
  */
 package com.ceos.plc4x.s7;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
-import org.apache.plc4x.java.PlcDriverManager;
-import org.apache.plc4x.java.api.PlcConnection;
-import org.apache.plc4x.java.api.messages.PlcReadRequest;
-import org.apache.plc4x.java.api.messages.PlcReadResponse;
-import org.apache.plc4x.java.api.types.PlcResponseCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -83,6 +76,7 @@ public class PLCOptimizerByRequest {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        /*
         try (PlcConnection plcConnection = new PlcDriverManager().getConnection("s7://192.168.1.51?remote-rack=0&remote-slot=3&controller-type=S7_400")){
             
             PlcReadRequest.Builder builder = plcConnection.readRequestBuilder();
@@ -134,6 +128,7 @@ public class PLCOptimizerByRequest {
         }  catch (Exception e) {
             e.printStackTrace();
         }   
+    */
     }
     
 }

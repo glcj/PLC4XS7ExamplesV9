@@ -18,20 +18,6 @@
  */
 package com.ceos.plc4x.s7;
 
-import java.time.Instant;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Consumer;
-import org.apache.plc4x.java.PlcDriverManager;
-import org.apache.plc4x.java.api.PlcConnection;
-import org.apache.plc4x.java.api.messages.PlcSubscriptionEvent;
-import org.apache.plc4x.java.api.messages.PlcSubscriptionRequest;
-import org.apache.plc4x.java.api.messages.PlcSubscriptionResponse;
-import org.apache.plc4x.java.s7.events.S7AlarmEvent;
-import org.apache.plc4x.java.s7.events.S7ModeEvent;
-import org.apache.plc4x.java.s7.events.S7SysEvent;
-import org.apache.plc4x.java.s7.events.S7UserEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,7 +33,7 @@ public class PLCEventSubscription {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
+/*
         try (PlcConnection plcConnection = new PlcDriverManager().getConnection("s7://192.168.1.51?remote-rack=0&remote-slot=3&controller-type=S7_400")){
             
             /*  
@@ -57,11 +43,12 @@ public class PLCEventSubscription {
             * MODE: PLC operating status.
             * ALM:  Alarm and events, from the PLC or from the user.
             */
+/*
             PlcSubscriptionRequest.Builder subsUsr = plcConnection.subscriptionRequestBuilder();
             PlcSubscriptionRequest.Builder subsSys = plcConnection.subscriptionRequestBuilder();
             PlcSubscriptionRequest.Builder subsMode = plcConnection.subscriptionRequestBuilder();
             PlcSubscriptionRequest.Builder subsAlm = plcConnection.subscriptionRequestBuilder();
-
+*/
             /*
             * A single constructor for all events.
             * USR:  User events.
@@ -69,38 +56,38 @@ public class PLCEventSubscription {
             * MODE: PLC operating status.
             * ALM:  Alarm and events, from the PLC or from the user.
             */            
-            PlcSubscriptionRequest.Builder subsAll = plcConnection.subscriptionRequestBuilder(); 
+            //PlcSubscriptionRequest.Builder subsAll = plcConnection.subscriptionRequestBuilder(); 
             
             /*
             * Specifying individual events. 
             */
-            subsUsr.addEventField("USR-1", "USR");
-            subsSys.addEventField("SYS-1", "SYS");
-            subsMode.addEventField("MODE-1", "MODE");             
-            subsAlm.addEventField("ALARM-1", "ALM");
+            //subsUsr.addEventField("USR-1", "USR");
+            //subsSys.addEventField("SYS-1", "SYS");
+            //subsMode.addEventField("MODE-1", "MODE");             
+            //subsAlm.addEventField("ALARM-1", "ALM");
             
             /*
             * Specifying multiple events for a single subscription.. 
             */            
-            subsAll.addEventField("USR-1", "USR");
-            subsAll.addEventField("SYS-1", "SYS");
-            subsAll.addEventField("MODE-1", "MODE");  
-            subsAll.addEventField("ALARM-1", "ALM");             
+            //subsAll.addEventField("USR-1", "USR");
+            //subsAll.addEventField("SYS-1", "SYS");
+            //subsAll.addEventField("MODE-1", "MODE");  
+            //subsAll.addEventField("ALARM-1", "ALM");             
 
             /*
             * I already build the individual structures. 
             */               
-            PlcSubscriptionRequest subsRequestUsr = subsUsr.build();
-            PlcSubscriptionRequest subsRequestSys = subsSys.build();
-            PlcSubscriptionRequest subsRequestMode = subsMode.build();
-            PlcSubscriptionRequest subsRequestAlm = subsAlm.build();
+            //PlcSubscriptionRequest subsRequestUsr = subsUsr.build();
+            //PlcSubscriptionRequest subsRequestSys = subsSys.build();
+            //PlcSubscriptionRequest subsRequestMode = subsMode.build();
+            //PlcSubscriptionRequest subsRequestAlm = subsAlm.build();
 
-            PlcSubscriptionRequest subsRequestAll = subsAll.build();            
+            //PlcSubscriptionRequest subsRequestAll = subsAll.build();            
             
             /*
             * Defining the way to consume events.
             */
-            
+            /*
             Consumer<PlcSubscriptionEvent> eventUsrConsumer = (event) -> {
                 System.out.println("Consuming messages USR: " +  event.toString());
             };            
@@ -120,35 +107,40 @@ public class PLCEventSubscription {
             Consumer<PlcSubscriptionEvent> eventAllConsumer = (event) -> {
                 System.out.println("Consuming messages USR,SYS,MODE & ALARM: " + event.toString());
             };              
+            */
             
             /*
             * Subscribes to the controller.
-            */                        
+            */      
+            /*
             PlcSubscriptionResponse subsResponseUsr = subsRequestUsr.execute().get(2, TimeUnit.SECONDS);
             PlcSubscriptionResponse subsResponseSys = subsRequestSys.execute().get(2, TimeUnit.SECONDS);
             PlcSubscriptionResponse subsResponseMode = subsRequestMode.execute().get(2, TimeUnit.SECONDS);
             PlcSubscriptionResponse subsResponseAlm = subsRequestAlm.execute().get(2, TimeUnit.SECONDS);
             PlcSubscriptionResponse subsResponseAll = subsRequestAll.execute().get(2, TimeUnit.SECONDS);            
-            
+            */
             
             /*
             * Check for response status.
-            */              
+            */    
+            /*
             System.out.println("USR Subscription        : " + subsResponseUsr.getResponseCode("USR-1"));
             System.out.println("SYS Subscription        : " + subsResponseSys.getResponseCode("SYS-1"));
             System.out.println("MODE Subscription       : " + subsResponseMode.getResponseCode("MODE-1"));
             System.out.println("ALARM_X Subscription    : " + subsResponseAlm.getResponseCode("ALARM-1"));
             System.out.println("");
-
+            */
             
             /*
             * Register my consumers
-            */            
+            */          
+            /*
             subsResponseUsr.getSubscriptionHandle("USR-1").register(eventUsrConsumer);
             subsResponseSys.getSubscriptionHandle("SYS-1").register(eventSysConsumer);
             subsResponseMode.getSubscriptionHandle("MODE-1").register(eventModeConsumer);
             subsResponseAlm.getSubscriptionHandle("ALARM-1").register(eventAlmConsumer);
             System.out.println("Waiting for events");
+            */
             
             /*                        
             PlcSubscriptionRequest.Builder queryBuilder = plcConnection.subscriptionRequestBuilder();
@@ -158,7 +150,7 @@ public class PLCEventSubscription {
             
             System.out.println("QUERY ALARM_S: " + queryResponse.getResponseCode("theQuery"));   
             */
-            
+      /*      
             Thread.sleep(190000);
             
             System.out.println("Bye...");
@@ -167,7 +159,8 @@ public class PLCEventSubscription {
             
         }  catch (Exception e) {
             e.printStackTrace();
-        }        
+        } 
+        */
     }
     
 }
